@@ -10,7 +10,8 @@ Here we are going to code different colors into the console. We are going to be 
 ## ColorPrinter.java / ColorPrinterTest.java
 We are going to print colorful file names. For example, the list of files are going to be colorful and we are going to test it here with ColoorPrinterTest.java. The test file is going to test different colors and see if they pass.
 ## TruffulaOptions.java / TruffulaOptionsTest.java
-
+Here we are going to have options for controlling how a directory tree is displayed. We are going to have three options, show hidden files, use colored output, and/or the root directory from where to start printing the tree. We are going to test if the truffula.java is working correctly and passing all the test with different options. 
 ## TruffulaPrinter.java / TruffulaPrinterTest.java
-
-## AlphabeticalFileSorter.java
+this is responisble for printing a directory tree structure with colored output, we have to make sure it is case insenstive. In summary, this file will print the directory structure cleanly and colorfully, based on user settings. We will test using the TruffulaPrinterTest.java, we will test all the different formatting structures. 
+## AlphabeticalFileSorter.java, 
+This will sort the files alphabetically by the name and we have to make sure it is ignoring case differences.
