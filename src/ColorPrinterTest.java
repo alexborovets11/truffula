@@ -63,10 +63,29 @@ void testPrintWithBlueColor(){
     // Act
     String message = "Test for the purple color";
     colorPrinter.println(message);
-    
+
     // Assert: Check output
     String expected = ConsoleColor.PURPLE + "Test for the purple color" + System.lineSeparator() + ConsoleColor.RESET;
     assertEquals(expected, outputStream.toString());
 
+  }
+
+    @Test
+  void testPrintWithBlackColor() {
+    // Arrange
+    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    PrintStream printStream = new PrintStream(outputStream);
+
+    ColorPrinter colorPrinter = new ColorPrinter(printStream);
+
+    colorPrinter.setCurrentColor(ConsoleColor.BLACK);
+
+    // Act
+    String message = "Test for the black color";
+    colorPrinter.print(message);
+    
+    // Assert
+    String expected = ConsoleColor.BLACK + "Test for the black color" + ConsoleColor.RESET;
+    assertEquals(expected, outputStream.toString());
   }
 }
