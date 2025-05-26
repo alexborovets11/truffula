@@ -75,7 +75,11 @@ public class ColorPrinter {
    * @param message the message to print
    */
   public void print(String message) {
-    print(message, true);
+    if (currentColor == null) {
+      printStream.print(message);
+    } else {
+      printStream.print(currentColor + message + ConsoleColor.RESET);
+    }
   }
 
   /**
@@ -88,15 +92,15 @@ public class ColorPrinter {
   public void print(String message, boolean reset) {
     // TODO: Implement this!
     
-    printStream.print(currentColor);
-
-    printStream.print(message);
-
-    if(reset == true){
-      printStream.print(ConsoleColor.RESET);
+    if (currentColor == null) {
+      printStream.print(message);
+    } else {
+      printStream.print(currentColor + message);
+      if (reset) {
+        printStream.print(ConsoleColor.RESET);
+      }
     }
   }
-
   /**
    * Constructs a ColorPrinter with the specified PrintStream.
    * The default color is set to ConsoleColor.WHITE.
