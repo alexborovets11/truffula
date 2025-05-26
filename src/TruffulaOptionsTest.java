@@ -43,4 +43,22 @@ public class TruffulaOptionsTest {
         assertTrue(options.isShowHidden());
         assertFalse(options.isUseColor());
     }
+
+    
+    @Test
+    void testOnlyHiddenFlag(@TempDir File tempDir) throws FileNotFoundException {
+        // Arrange
+        File dir = new File(tempDir, "subfolder");
+        dir.mkdir();
+        String path = dir.getAbsolutePath();
+        String[] args = {"-h", path};
+
+        // Act
+        TruffulaOptions options = new TruffulaOptions(args);
+
+        // Assert
+        assertEquals(path, options.getRoot().getAbsolutePath());
+        assertTrue(options.isShowHidden());
+        assertTrue(options.isUseColor());
+    }
 }
