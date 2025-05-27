@@ -1,4 +1,6 @@
+import java.io.File;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -111,8 +113,46 @@ public class TruffulaPrinter {
     // - For Wave 6: Use AlphabeticalFileSorter
     // DO NOT USE SYSTEM.OUT.PRINTLN
     // USE out.println instead (will use your ColorPrinter)
+    File root = options.getRoot();
+    if (!root.exists()) {
+      out.println("Error: Path does not exist.");
+      return;
+    }
 
-    out.println("printTree was called!");
-    out.println("My options are: " + options);
+    printDirectoryTree(root, 0, 0);
+  }
+
+  private void printDirectoryTree(File directory, int depth, int colorIndex) {
+    if (!directory.isDirectory()) return;
+
+    File[] files = directory.listFiles();
+    if (files == null) return;
+
+    if (!options.isShowHidden()) {
+      files = Arrays.stream(files)
+                    .filter(f -> !f.getName().startsWith("."))
+                    .toArray(File[]::new);
+    }
+
+    AlphabeticalFileSorter.sort(files);
+
+    for (File file : files) {
+      String indent = "   ".repeat(depth);
+
+      if (options.isUseColor()) {
+        ConsoleColor color = colorSequence.get(colorIndex % colorSequence.size());
+        out.setCurrentColor(color);
+      } else {
+        out.setCurrentColor(ConsoleColor.WHITE);
+      }
+
+      //out.println(indent + file.getName());
+      String name = file.isDirectory() ? file.getName() + "/" : file.getName();
+      out.println(indent + name);
+
+      if (file.isDirectory()) {
+        printDirectoryTree(file, depth + 1, colorIndex + 1);
+      }
+    }
   }
 }
