@@ -195,7 +195,7 @@ public class TruffulaPrinterTest {
     
         File subdir = new File(root, "sub");
         File file = new File(subdir, "file.txt");
-    
+
         assertTrue(subdir.mkdir());
         assertTrue(file.createNewFile());
     

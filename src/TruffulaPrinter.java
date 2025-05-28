@@ -146,7 +146,6 @@ public class TruffulaPrinter {
         out.setCurrentColor(null);
       }
 
-      //out.println(indent + file.getName());
       String name = file.isDirectory() ? file.getName() + "/" : file.getName();
       out.println(indent + name);
 
