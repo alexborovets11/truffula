@@ -150,4 +150,42 @@ public class ColorPrinterTest {
 
     assertEquals(expected, outputStream.toString());
   }
+
+  @Test
+  void testPrintlnAddsNewLine() {
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    ColorPrinter printer = new ColorPrinter(new PrintStream(out));
+
+    printer.setCurrentColor(ConsoleColor.PURPLE);
+    printer.println("hello");
+
+    String expected = ConsoleColor.PURPLE + "hello" + System.lineSeparator() + ConsoleColor.RESET;
+    assertEquals(expected, out.toString());
+  } 
+
+  @Test
+    void testDefaultColorPrint() {
+      ByteArrayOutputStream out = new ByteArrayOutputStream();
+      ColorPrinter printer = new ColorPrinter(new PrintStream(out));
+  
+      printer.print("plain text");
+  
+      String expected = ConsoleColor.WHITE + "plain text" + ConsoleColor.RESET;
+      assertEquals(expected, out.toString());
+  }
+
+  @Test
+  void testSetColorAndReset() {
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    ColorPrinter printer = new ColorPrinter(new PrintStream(out));
+
+    printer.setCurrentColor(ConsoleColor.YELLOW);
+    printer.print("yellow text");
+    printer.setCurrentColor(ConsoleColor.RESET);
+    printer.print("reset text");
+
+    String expected = ConsoleColor.YELLOW + "yellow text" + ConsoleColor.RESET +
+                      ConsoleColor.RESET + "reset text" + ConsoleColor.RESET;
+    assertEquals(expected, out.toString());
+  }
 }

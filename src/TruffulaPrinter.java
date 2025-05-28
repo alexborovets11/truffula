@@ -143,7 +143,7 @@ public class TruffulaPrinter {
         ConsoleColor color = colorSequence.get(colorIndex % colorSequence.size());
         out.setCurrentColor(color);
       } else {
-        out.setCurrentColor(ConsoleColor.WHITE);
+        out.setCurrentColor(null);
       }
 
       //out.println(indent + file.getName());
